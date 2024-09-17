@@ -1,0 +1,11 @@
+node_modules
+dist
+docs-dist
+*.svg
+*.png
+*.jpeg
+.eslintignore
+.gitignore
+.prettierignore
+*.lock
+yarn-error.log
