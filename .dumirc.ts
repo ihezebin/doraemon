@@ -28,6 +28,7 @@ const config: IDumiUserConfig = {
     `html * {font-family: 'Kaiti SC', 'Songti SC', 'PingFang SC', cursive, sans-serif !important;}`,
     `.hidden-sidebar {padding: 64px;}`,
   ],
+  favicons: ['https://www.hezebin.com/favicon.ico', '/favicon.ico'],
   themeConfig: defineThemeConfig({
     logo: '/logo.png',
     rtl: false,
@@ -61,7 +62,7 @@ const config: IDumiUserConfig = {
       },
       {
         text: '组件',
-        link: '/component',
+        link: '/component/button',
       },
     ],
     footer: '❤️ Powered by hezebin',
