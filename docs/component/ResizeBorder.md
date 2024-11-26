@@ -1,7 +1,7 @@
 ---
 title: ResizeBorder
 group: 
-  title: 基础
+  title: 布局
 nav:
   title: 组件
   order: 1

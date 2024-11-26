@@ -2,6 +2,7 @@
 title: Button
 group: 
   title: 基础
+  order: 1
 nav:
   title: 组件
   order: 1

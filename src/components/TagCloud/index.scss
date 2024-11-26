@@ -1,0 +1,15 @@
+@import "../../assets/css/variable";
+.#{$prefix}-tag-cloud {
+  display: flex;
+  gap: 20px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+
+  span {
+    cursor: pointer;
+    transition: all 0.3s;
+    &:hover {
+      color: $link-hover-color;
+    }
+  }
+}
