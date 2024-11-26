@@ -23,15 +23,13 @@ export interface LayoutProps extends React.ComponentProps<any> {
   footer?: React.ReactNode;
   footerClassName?: string;
   /**
-   * @description :root {
-   *   --#{$prefix}-layout-dark-background-color: #181c27;
-   *   --#{$prefix}-layout-dark-color: #d0d0d0;
-   *   --#{$prefix}-layout-dark-border-color: rgb(152 188 252 / .06);
-   *   --#{$prefix}-layout-dark-header-background-color: #1f3144;
-   * }
+   * @description 通过在容器上加入 theme="dark" 属性来应用 :root 下的变量
    */
   dark?: boolean;
   onClick?: (keys: string[]) => void;
+  /**
+   * @default false
+   */
   collapsed?: boolean;
   onCollapsedChange?: (collapsed: boolean) => void;
   /**
