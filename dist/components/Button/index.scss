@@ -1,13 +1,46 @@
-.custom-button {
-  padding: 10px 20px;
-  background-color: rebeccapurple;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
+@import "../../assets/css/variable";
 
+.#{$prefix}-exit-button,
+.#{$prefix}-fullscreen-exit-button,
+.#{$prefix}-fullscreen-button,
+.#{$prefix}-minimized-button {
+  padding: 0;
+  margin: 0;
+  width: initial !important;
+  height: initial;
+  transition: all .3s;
+  border-radius: 50%;
+  border: none;
   &:hover {
-    background-color: orange;
+    transform: scale(1.2);
+  }
+
+}
+
+.#{$prefix}-exit-button {
+  color: #fa3229;
+  background-color: white;
+  &:not(:disabled):not(.ant-btn-disabled):hover {
+    color: #fa3229;
+    background-color: white;
+  }
+}
+
+.#{$prefix}-fullscreen-exit-button,.#{$prefix}-fullscreen-button {
+  background-color: #57be6a;
+  color: white;
+  &:not(:disabled):not(.ant-btn-disabled):hover {
+    color: white;
+    background-color: #57be6a;
+  }
+}
+
+
+.#{$prefix}-minimized-button {
+  color: #ffbf00;
+  background-color: white;
+  &:not(:disabled):not(.ant-btn-disabled):hover {
+    color: #ffbf00;
+    background-color: white;
   }
 }

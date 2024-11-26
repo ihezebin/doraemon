@@ -1,17 +1,94 @@
-import './index.scss'
-import React, { FC } from 'react'
+import {
+  CloseCircleFilled,
+  FullscreenExitOutlined,
+  FullscreenOutlined,
+  MinusCircleFilled,
+} from '@ant-design/icons';
+import classNames from 'classnames';
+import React, { ComponentProps } from 'react';
 
-interface ButtonProps {
-  label: string
-  onClick?: () => void
+import { Button } from 'antd';
+import { doraemonClassName } from '../../utils/internal';
+import './index.scss';
+
+interface ButtonProps extends ComponentProps<any> {
+  /**
+   * @default middle
+   */
+  size?: 'small' | 'middle' | 'large';
+  disabled?: boolean;
 }
 
-const Button: FC<ButtonProps> = ({ label, onClick }) => {
+export const ExitButton = ({
+  size = 'middle',
+  className,
+  disabled,
+  ...props
+}: ButtonProps) => {
   return (
-    <button className="custom-button" onClick={onClick}>
-      {label}
-    </button>
-  )
-}
+    <Button
+      disabled={disabled}
+      size={size}
+      type={'text'}
+      className={classNames(doraemonClassName('exit-button'), className)}
+      icon={<CloseCircleFilled />}
+      {...props}
+    />
+  );
+};
 
-export default Button
+export const FullscreenButton = ({
+  size,
+  className,
+  disabled,
+  ...props
+}: ButtonProps) => {
+  return (
+    <Button
+      disabled={disabled}
+      size={size}
+      type={'text'}
+      className={classNames(doraemonClassName('fullscreen-button'), className)}
+      icon={<FullscreenOutlined />}
+      {...props}
+    />
+  );
+};
+export const FullscreenExitButton = ({
+  size,
+  className,
+  disabled,
+  ...props
+}: ButtonProps) => {
+  return (
+    <Button
+      disabled={disabled}
+      size={size}
+      type={'text'}
+      className={classNames(
+        doraemonClassName('fullscreen-exit-button'),
+        className,
+      )}
+      icon={<FullscreenExitOutlined />}
+      {...props}
+    />
+  );
+};
+
+export const MinimizedButton = ({
+  size,
+  className,
+  disabled,
+  ...props
+}: ButtonProps) => {
+  return (
+    <Button
+      disabled={disabled}
+      size={size}
+      type={'text'}
+      className={classNames(doraemonClassName('minimized-button'), className)}
+      icon={<MinusCircleFilled />}
+      {...props}
+    />
+  );
+};

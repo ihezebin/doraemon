@@ -7,16 +7,16 @@ nav:
   order: 1
 ---
 
-# Button
-该组件和该文档页为测试验证 dumi 配置，后续将删除，然后添加完善其他组件
+## ExitButton
+<code src="./examples/ExitButton.tsx"></code>
 
-```tsx
-import React from 'react';
-import { Button } from '@hezebin/doraemon'
+## FullscreenButton
+<code src="./examples/FullscreenButton.tsx"></code>
 
-export default () => {
-  return <Button label={'x1xx'} onClick={()=>alert('xxxx')}/>
-}
-```
+## FullscreenExitButton
+<code src="./examples/FullscreenExitButton.tsx"></code>
 
-<API id="Button"></API>
+## MinimizedButton
+<code src="./examples/MinimizedButton.tsx"></code>
+
+<API id="ExitButton"></API>

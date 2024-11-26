@@ -20,17 +20,21 @@ interface IApi {
     putForm<T = any, R = Response<T>, D = any>(url: string, data?: D, config?: AxiosRequestConfig<D>): Promise<R>;
     patchForm<T = any, R = Response<T>, D = any>(url: string, data?: D, config?: AxiosRequestConfig<D>): Promise<R>;
 }
-export interface Error extends Partial<Response<any>> {
-    error: any;
-}
 interface Config extends CreateAxiosDefaults {
     onRequest?: (request: InternalAxiosRequestConfig) => InternalAxiosRequestConfig;
     onResponse?: (response: Response<any>) => Response<any>;
     /**
      * onError
-     * @param err 必含字段 code 和 message, 当为 500 这类非正常响应错误时 status 和 response 非空, 否则预期之外的错误仅含必须字段值
+     * @param 同 onResponse, 但非 2xx 状态码的响应会走该函数。
      */
-    onError?: (err: Error) => any;
+    onError?: (response: Response<any>) => any;
+    /**
+     * onAbnormal 异常处理，如果请求未能成功发送或接收（例如网络断开、超时等）触发该函数
+     * @param code 错误码
+     * @param message 错误信息
+     * @param err 错误对象
+     */
+    onAbnormal?: (err: any, code: string, message: string) => any;
     withToken?: () => string;
 }
 export declare class Api implements IApi {

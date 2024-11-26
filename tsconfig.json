@@ -12,5 +12,5 @@
       "doraemon/*": ["src/*", "*"]
     }
   },
-  "include": [".dumirc.ts", "typing.d.ts" , "src/**/*"]
+  "include": [".dumirc.ts", "typing.d.ts" , "src/**/*", "dev/**/*", "docs/**/*"]
 }

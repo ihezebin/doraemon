@@ -6,7 +6,7 @@ import _defineProperty from '@babel/runtime/helpers/esm/defineProperty';
 import axios from 'axios';
 import { API_DEFAULT_CONFIG } from './constant';
 
-var _excluded = ["onRequest", "onResponse", "onError", "withToken"];
+var _excluded = ["onRequest", "onResponse", "onError", "onAbnormal", "withToken"];
 export var Api = /*#__PURE__*/function () {
   function Api(config) {
     _classCallCheck(this, Api);
@@ -15,6 +15,7 @@ export var Api = /*#__PURE__*/function () {
     var onRequest = config.onRequest,
       onResponse = config.onResponse,
       onError = config.onError,
+      onAbnormal = config.onAbnormal,
       withToken = config.withToken,
       omitConfig = _objectWithoutProperties(config, _excluded);
     this.kernel = axios.create(_objectSpread(_objectSpread({}, API_DEFAULT_CONFIG), omitConfig));
@@ -24,12 +25,10 @@ export var Api = /*#__PURE__*/function () {
       if (token) {
         request.headers.Token = token;
       }
-      return Promise.resolve(onRequest ? onRequest(request) : request);
+      return onRequest ? onRequest(request) : request;
     };
     var onRequestRejected = function onRequestRejected(err) {
-      return Promise.reject(onError ? onError({
-        error: err
-      }) : err);
+      return Promise.reject(onAbnormal ? onAbnormal(err, err === null || err === void 0 ? void 0 : err.code, err === null || err === void 0 ? void 0 : err.message) : err);
     };
     this.kernel.interceptors.request.use(onRequestFulfilled, onRequestRejected);
     var onResponseFulfilled = function onResponseFulfilled(response) {
@@ -45,29 +44,14 @@ export var Api = /*#__PURE__*/function () {
       if (err.response) {
         var _err$response = err.response,
           status = _err$response.status,
-          statusText = _err$response.statusText,
-          _err$response$data = _err$response.data,
-          code = _err$response$data.code,
-          message = _err$response$data.message,
-          _data = _err$response$data.data;
-        var _response = {
-          status: status,
+          _data = _err$response.data;
+        var resp = _objectSpread({
           response: err.response,
-          message: message || statusText,
-          code: code,
-          data: _data || {}
-        };
-        return onError ? onError(_objectSpread(_objectSpread({}, _response), {}, {
-          error: err
-        })) : _response;
+          status: status
+        }, _data);
+        return onError ? onError(resp) : resp;
       } else {
-        var _response2 = {
-          message: err === null || err === void 0 ? void 0 : err.message,
-          code: err === null || err === void 0 ? void 0 : err.code
-        };
-        return Promise.reject(onError ? onError({
-          error: err
-        }) : _response2);
+        return Promise.reject(onAbnormal ? onAbnormal(err, err === null || err === void 0 ? void 0 : err.code, err === null || err === void 0 ? void 0 : err.message) : err);
       }
     };
     this.kernel.interceptors.response.use(onResponseFulfilled, onResponseRejected);
