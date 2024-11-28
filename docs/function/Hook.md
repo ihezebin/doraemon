@@ -5,8 +5,10 @@ nav:
   order: 2
 ---
 # Hooks
+常用 Hook 查阅 https://ahooks.js.org/zh-CN/hooks
 
 ## useObjState
+对于对象的状态管理，哪怕时必须字段，set 时也可只传入部分字段，实现部分更新
 
 ```tsx
 import { Button } from 'antd'
