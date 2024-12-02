@@ -1,4 +1,4 @@
-@import "../../assets/css/variable";
+@use "../../assets/css/variable" as *;
 
 $menu-collapsed-width: 80px;
 $menu-width: 250px;
