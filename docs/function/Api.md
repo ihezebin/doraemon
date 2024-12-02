@@ -79,17 +79,32 @@ const api = newApi({
     }
     return res
   },
-  onError: (err) => {
-    if (err.status) {
-      // 有响应错误处理
-      message.error(err?.message)
+  onError: (res) => {
+    console.log('onError')
+    if (res.status === 401) {
+      setLocalItem(KEY_TOKEN)
     } else {
-      // 无响应错误处理
-      notification.error({
-        message: err.message,
-        description: <span style={{ color: 'gray', fontSize: '13px' }}>{`错误码: ${err.code}`}</span>,
-      })
+      if (res?.message) {
+        message.error(res.message).then()
+      } else {
+        const resp = res.response
+        notification.error({
+          message: resp?.statusText,
+          description: (
+            <span style={{ color: 'gray', fontSize: '13px' }}>{`错误码: ${resp?.status}`}</span>
+          ),
+        })
+      }
     }
+    return res
+  },
+  onAbnormal: (err, code, message) => {
+    console.error('onAbnormal')
+    // 无响应错误处理
+    notification.error({
+      message: message,
+      description: <span style={{ color: 'gray', fontSize: '13px' }}>{`错误码: ${code}`}</span>,
+    })
     return err
   },
 })
